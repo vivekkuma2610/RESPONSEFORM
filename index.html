@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,65 +11,71 @@
             margin-top: 20px;
             border-collapse: collapse;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid black;
         }
-        th, td {
+
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
     </style>
 </head>
+
 <body>
-    <h1 id="title">Form and Table</h1>
-    <p id="description">Please fill out the form below:</p>
+    <form id="survey-form">
+        <label for="first-name">First Name:</label>
+        <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required><br><br>
 
-    <form id="myForm">
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" required><br><br>
-
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" required><br><br>
+        <label for="last-name">Last Name:</label>
+        <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required><br><br>
 
         <label for="address">Address:</label>
-        <input type="text" id="address" name="address" required><br><br>
+        <input type="text" id="address" name="address" placeholder="Enter your address" required><br><br>
 
         <label for="pincode">Pincode:</label>
-        <input type="number" id="pincode" name="pincode" required><br><br>
+        <input type="number" id="pincode" name="pincode" placeholder="Enter your pincode" required><br><br>
 
-        <label for="gender">Gender:</label>
+        <label>Gender:</label>
         <input type="radio" id="male" name="gender" value="male" required>
         <label for="male">Male</label>
         <input type="radio" id="female" name="gender" value="female" required>
         <label for="female">Female</label><br><br>
 
-        <label for="food">Choice of Food (Select at least 2):</label><br>
-        <input type="checkbox" id="food1" name="food" value="idly">
-        <label for="idly">idly</label>
-        <input type="checkbox" id="food2" name="food" value="dosa">
-        <label for="dosa">dosa</label>
-        <input type="checkbox" id="food3" name="food" value="vada">
-        <label for="vada">vada</label>
-        <input type="checkbox" id="food4" name="food" value="poori">
-        <label for="poori">poori</label>
-        <input type="checkbox" id="food5" name="food" value="pongal">
-        <label for="pongal">pongal</label><br><br>
+        <label>Choice of Food (Select at least 2):</label><br>
+        <input type="checkbox" id="food1" name="food" value="Food 1">
+        <label for="food1">Food 1</label>
+        <input type="checkbox" id="food2" name="food" value="Food 2">
+        <label for="food2">Food 2</label>
+        <input type="checkbox" id="food3" name="food" value="Food 3">
+        <label for="food3">Food 3</label>
+        <input type="checkbox" id="food4" name="food" value="Food 4">
+        <label for="food4">Food 4</label>
+        <input type="checkbox" id="food5" name="food" value="Food 5">
+        <label for="food5">Food 5</label><br><br>
 
         <label for="state">State:</label>
         <select id="state" name="state" required>
-            <option value="tamilnadu">tamilnadu</option>
-            <option value="kerala">kerala</option>
-            <option value="karnataka">karnataka</option>
+            <option value="state1">State 1</option>
+            <option value="state2">State 2</option>
+            <option value="state3">State 3</option>
         </select><br><br>
 
         <label for="country">Country:</label>
         <select id="country" name="country" required>
-            <option value="INDIA">INDIA</option>
-            <option value="CHINA">CHINA</option>
-            <option value="JAPAN">JAPAN</option>
+            <option value="country1">Country 1</option>
+            <option value="country2">Country 2</option>
+            <option value="country3">Country 3</option>
         </select><br><br>
 
-        <input type="submit" value="Submit">
+        <label for="comments">Comments:</label><br>
+        <textarea id="comments" name="comments" placeholder="Enter your comments"></textarea><br><br>
+
+        <input type="submit" id="submit" value="Submit">
     </form>
 
     <table id="dataTable">
@@ -90,30 +97,32 @@
     </table>
 
     <script>
-        document.getElementById("myForm").addEventListener("submit", function(event) {
+        document.getElementById("survey-form").addEventListener("submit", function(event) {
             event.preventDefault();
 
-            let firstName = document.getElementById("firstName").value;
-            let lastName = document.getElementById("lastName").value;
+            let firstName = document.getElementById("first-name").value;
+            let lastName = document.getElementById("last-name").value;
             let address = document.getElementById("address").value;
             let pincode = document.getElementById("pincode").value;
             let gender = document.querySelector('input[name="gender"]:checked').value;
             let foods = Array.from(document.querySelectorAll('input[name="food"]:checked')).map(food => food.value).join(', ');
             let state = document.getElementById("state").value;
             let country = document.getElementById("country").value;
+            let comments = document.getElementById("comments").value;
 
             let table = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
             let newRow = table.insertRow(table.rows.length);
-            let cells = [firstName, lastName, address, pincode, gender, foods, state, country];
+            let cells = [firstName, lastName, address, pincode, gender, foods, state, country, comments];
 
             for (let i = 0; i < cells.length; i++) {
                 let cell = newRow.insertCell(i);
                 cell.appendChild(document.createTextNode(cells[i]));
             }
 
-            // Clear form fields after updating the table
-            document.getElementById("myForm").reset();
+            // Clear form fields after updating the record to table
+            document.getElementById("survey-form").reset();
         });
     </script>
 </body>
+
 </html>
